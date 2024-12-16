@@ -13,6 +13,7 @@ import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 
 class DetailMhsViewModel (
     savedStateHandle: SavedStateHandle,
@@ -49,8 +50,14 @@ class DetailMhsViewModel (
             ),
         )
     fun deleteMhs() {
-
+        detailUistate.value.detailUiEvent.toMahasiswaEntity().let {
+            viewModelScope.launch {
+                repositoryMhs.deleteMhs(it)
+            }
+        }
     }
+
+
 }
 
 
@@ -60,4 +67,16 @@ data class DetailUiState(
     val isLoading: Boolean = false,
     val isError : Boolean = false,
     val errorMessage: String = ""
-)
+) {
+    val isUiEventEmpety: Boolean
+        get() =detailUiEvent == MahasiswaEvent()
+    val isUiEventNotEmpety: Boolean
+        get() =detailUiEvent != MahasiswaEvent()
+
+    //data class untuk menampung data yang akan ditampilkan di UI
+
+    //memindahkan data dari entity ke ui
+    fun Mahasiswa.toDetailUiEvent(): MahasiswaEvent {
+
+    }
+}
