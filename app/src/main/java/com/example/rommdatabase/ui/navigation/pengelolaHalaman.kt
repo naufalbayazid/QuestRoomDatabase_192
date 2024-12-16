@@ -12,6 +12,7 @@ import androidx.navigation.navArgument
 import com.example.RommDatabase.ui.View.mahasiswa.DestinasiInsert
 import com.example.RommDatabase.ui.View.mahasiswa.InsertMhsView
 import com.example.rommdatabase.ui.viewMahasiswa.DetailMhsView
+import com.example.rommdatabase.ui.viewMahasiswa.HomeMhsView
 import com.example.rommdatabase.ui.viewMahasiswa.UpdateMhsView
 
 
@@ -20,10 +21,29 @@ fun PengelolaHalaman(
     navController: NavHostController = rememberNavController(),
     modifier: Modifier = Modifier
 ) {
-    NavHost(navController = navController, startDestination = DestinasiInsert.route) {
+    NavHost(navController = navController, startDestination = DestinasiHome.route) {
         composable(
+            route = DestinasiHome.route
+        )
+        {
+            HomeMhsView(
+                onDetailClick = { nim ->
+                    navController.navigate("${DestinasiDetail.route}/$nim")
+                    println(
+                        "PengelolaHalaman: nim = $nim"
+                    )
+                },
+                onAddMhs = {
+
+                    navController.navigate(DestinasiInsert.route)
+                },
+                modifier = modifier
+            )
+        }
+
+        composable (
             route = DestinasiInsert.route
-        ) {
+        ){
             InsertMhsView(
                 onBack = {}, onNavigate = {
                     navController.popBackStack()
@@ -45,6 +65,12 @@ fun PengelolaHalaman(
             nim?.let { nim ->
                 DetailMhsView(
                     onBack = {
+                        navController.popBackStack()
+                    },
+                    onEditClick = {navController.navigate("${DestinasiUpdate.route}/$it")
+                    },
+                    modifier = modifier,
+                    onDeleteClick = {
                         navController.popBackStack()
                     }
                 )

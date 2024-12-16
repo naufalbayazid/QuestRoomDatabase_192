@@ -34,7 +34,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 
 
 import com.example.rommdatabase.ui.costumwidget.TopAppBar
-import com.example.rommdatabase.ui.theme.navigation.AlamatNavigasi
+import com.example.rommdatabase.ui.navigation.AlamatNavigasi
 import com.example.rommdatabase.ui.viewmodel.FormErrorState
 import com.example.rommdatabase.ui.viewmodel.MahasiswaEvent
 import com.example.rommdatabase.ui.viewmodel.MahasiswaViewModel
@@ -42,7 +42,7 @@ import com.example.rommdatabase.ui.viewmodel.MhsUIState
 import com.example.rommdatabase.ui.viewmodel.PenyediaViewModel
 import kotlinx.coroutines.launch
 
-object  DestinasiInsert : AlamatNavigasi{
+object  DestinasiInsert : AlamatNavigasi {
     override  val route: String = " insert_mhs"
 }
 

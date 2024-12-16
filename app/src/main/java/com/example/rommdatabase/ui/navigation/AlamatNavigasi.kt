@@ -1,9 +1,9 @@
-package com.example.rommdatabase.ui.theme.navigation
+package com.example.rommdatabase.ui.navigation
 
 interface AlamatNavigasi {
     val route : String
 }
-object DestinasiHome : AlamatNavigasi{
+object DestinasiHome : AlamatNavigasi {
     override val route = "home"
 }
 
@@ -15,5 +15,6 @@ object DestinasiDetail : AlamatNavigasi {
 object DestinasiUpdate : AlamatNavigasi {
     override val route = "update"
     const val NIM = "nim"
-    val routesWithArg = "$route/{$NIM"}
+    val routesWithArg = "$route/{$NIM}"
+}
 

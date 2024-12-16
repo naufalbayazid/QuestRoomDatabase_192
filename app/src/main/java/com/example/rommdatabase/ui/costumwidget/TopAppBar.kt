@@ -18,6 +18,7 @@ fun TopAppBar(
     onBack: () -> Unit,
     showBackButton: Boolean = true,
     judul: String,
+    modifier: Modifier = Modifier
 ) {
     Box(
         modifier = Modifier

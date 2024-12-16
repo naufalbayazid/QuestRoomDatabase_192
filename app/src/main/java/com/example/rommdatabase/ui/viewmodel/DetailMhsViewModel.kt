@@ -3,8 +3,9 @@ package com.example.rommdatabase.ui.viewmodel
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.rommdatabase.data.entity.Mahasiswa
 import com.example.rommdatabase.repository.RepositoryMhs
-import com.example.rommdatabase.ui.theme.navigation.DestinasiDetail
+import com.example.rommdatabase.ui.navigation.DestinasiDetail
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -49,6 +50,7 @@ class DetailMhsViewModel (
                 isLoading = true,
             ),
         )
+
     fun deleteMhs() {
         detailUistate.value.detailUiEvent.toMahasiswaEntity().let {
             viewModelScope.launch {
@@ -56,9 +58,9 @@ class DetailMhsViewModel (
             }
         }
     }
-
-
 }
+
+
 
 
 
@@ -69,14 +71,24 @@ data class DetailUiState(
     val errorMessage: String = ""
 ) {
     val isUiEventEmpety: Boolean
-        get() =detailUiEvent == MahasiswaEvent()
+        get() = detailUiEvent == MahasiswaEvent()
     val isUiEventNotEmpety: Boolean
-        get() =detailUiEvent != MahasiswaEvent()
+        get() = detailUiEvent != MahasiswaEvent()
 
     //data class untuk menampung data yang akan ditampilkan di UI
-
+}
     //memindahkan data dari entity ke ui
     fun Mahasiswa.toDetailUiEvent(): MahasiswaEvent {
-
+        return MahasiswaEvent(
+            nim = nim,
+            nama = nama,
+            jenisKelamin = jeniskelamin,
+            alamat = alamat,
+            kelas = kelas,
+            angkatan = angkatan
+        )
     }
-}
+
+
+
+

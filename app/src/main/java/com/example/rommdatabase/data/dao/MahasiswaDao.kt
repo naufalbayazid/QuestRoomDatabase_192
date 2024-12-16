@@ -1,8 +1,10 @@
 package com.example.rommdatabase.data.dao
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Update
 import com.example.rommdatabase.data.entity.Mahasiswa
 import com.example.rommdatabase.repository.RepositoryMhs
 import kotlinx.coroutines.flow.Flow
@@ -11,33 +13,22 @@ import kotlinx.coroutines.flow.Flow
 interface MahasiswaDao {
     @Insert
     suspend fun insertMahasiswa(mahasiswa: Mahasiswa)
-    abstract fun getAllMahasiswa(): Flow<List<Mahasiswa>>
-    abstract fun getMahasiswa(nim: String): Flow<Mahasiswa>
-    abstract fun deleteMahasiswa(mahasiswa: Mahasiswa)
+
+    @Query("SELECT * FROM mahasiswa ORDER BY nama ASC")
+    fun getAllMahasiswa(): Flow<List<Mahasiswa>>
+
+    @Query("SELECT * FROM mahasiswa WHERE nim = :nim")
+     fun getMahasiswa(nim:String): Flow<Mahasiswa>
+
+     @Delete
+     suspend fun deleteMahasiswa(mahasiswa: Mahasiswa)
+
+     @Update
     fun updateMahasiswa(mahasiswa: Mahasiswa)
-}
-
-class LocalRepositoryMhs
-    (private val mahasiswaDao: MahasiswaDao)  : RepositoryMhs
-{
-    override suspend fun insertMhs(mahasiswa: Mahasiswa) {
-        mahasiswaDao.insertMahasiswa(mahasiswa)
-    }
-
-    override fun getAllMhs(): Flow<List<Mahasiswa>> {
-        return mahasiswaDao.getAllMahasiswa()
-    }
-    override fun getMhs(nim: String): Flow<Mahasiswa> {
-        return mahasiswaDao.getMahasiswa(nim)
-    }
-    override suspend fun deleteMhs(mahasiswa: Mahasiswa) {
-        mahasiswaDao.deleteMahasiswa(mahasiswa)
-    }
-    override suspend fun updateMhs(mahasiswa: Mahasiswa) {
-        mahasiswaDao.updateMahasiswa(mahasiswa)
-        }
 
 }
+
+
 
 
 
