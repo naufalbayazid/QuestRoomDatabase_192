@@ -13,6 +13,7 @@ interface MahasiswaDao {
     suspend fun insertMahasiswa(mahasiswa: Mahasiswa)
     abstract fun getAllMahasiswa(): Flow<List<Mahasiswa>>
     abstract fun getMahasiswa(nim: String): Flow<Mahasiswa>
+    abstract fun deleteMahasiswa(mahasiswa: Mahasiswa)
 }
 
 class LocalRepositoryMhs
@@ -28,6 +29,10 @@ class LocalRepositoryMhs
     override fun getMhs(nim: String): Flow<Mahasiswa> {
         return mahasiswaDao.getMahasiswa(nim)
     }
+    override suspend fun deleteMhs(mahasiswa: Mahasiswa) {
+        mahasiswaDao.deleteMahasiswa(mahasiswa)
+    }
+
 
 
 
