@@ -12,6 +12,7 @@ import androidx.navigation.navArgument
 import com.example.RommDatabase.ui.View.mahasiswa.DestinasiInsert
 import com.example.RommDatabase.ui.View.mahasiswa.InsertMhsView
 import com.example.rommdatabase.ui.viewMahasiswa.DetailMhsView
+import com.example.rommdatabase.ui.viewMahasiswa.UpdateMhsView
 
 
 @Composable
@@ -58,7 +59,17 @@ fun PengelolaHalaman(
             )
         )
         {
-
+            UpdateMhsView(
+                onBack = {
+                    navController.popBackStack()
+                },
+                onNavigate = {
+                    navController.popBackStack()
+                },
+                modifier = modifier
+            )
         }
+
+
     }
 }
